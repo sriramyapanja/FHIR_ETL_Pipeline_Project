@@ -9,3 +9,31 @@
 [About](./about.md) ||
 
 ![bpmn_sample](./assets/Bpmn_model.png)
+
+1. Patient Referral from Primary Care to Hospital 
+
+The process begins at the Primary Care Clinic, where a referral is initiated for a patient requiring specialist treatment. The clinic updates the patient’s referral details, including the reason for the referral and any supporting documentation, and communicates this information to the hospital. 
+
+2. Referral Review and Patient Registration at the Hospital 
+
+Upon receiving the referral, the hospital reviews the details to ensure accuracy and appropriateness. The patient is registered in the hospital system, and their information is entered into the Electronic Health Record (EHR) to facilitate the care process. 
+
+3. Specialist Evaluation and Treatment 
+
+A specialist evaluates the patient’s condition to determine the appropriate course of treatment. If treatment is required, the necessary care is provided. A decision gateway is used where the specialist evaluates whether further treatment is necessary. 
+
+4. Decision on Further Treatment 
+
+If Further Treatment is Needed: The patient is referred back to the Primary Care Clinic for ongoing care and follow-up. 
+
+If Treatment is Complete: The patient is discharged from the hospital. 
+
+5. Documentation and Communication from Hospital to Primary Care 
+
+Post-treatment, the hospital documents a comprehensive treatment summary, including outcomes and recommendations. This summary is shared with the Primary Care Clinic to ensure continuity of care. 
+
+6. Follow-Up Care Coordination at Primary Care 
+
+The Primary Care Clinic updates the patient’s medical records with the information provided by the hospital. If needed, follow-up appointments are scheduled to address any ongoing patient needs, completing the care coordination process. 
+
+ 
