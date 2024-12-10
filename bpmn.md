@@ -8,4 +8,4 @@
 [Team Contributions](./team_contrib.md) ||
 [About](./about.md) ||
 
-![bpmn_sample](./assets/bpmn_sample.png)
+![bpmn_sample](./assets/Bpmn_model.png)
