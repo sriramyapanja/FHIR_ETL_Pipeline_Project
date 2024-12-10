@@ -1,6 +1,5 @@
 import json
 import requests
-from pprint import pprint
 from pathlib import Path
 from src.registration import data_dir
 from src.data_templates import new_condition_dict
@@ -110,4 +109,3 @@ def get_snomed_code(patient_resource_id):
 if __name__ == '__main__':
     patient_resource_id = '985ac75c-54cd-47ab-afe1-93d52db5ba48'
     get_snomed_code(patient_resource_id=patient_resource_id)
-    # get_fhir_patient(patient_resource_id=patient_resource_id)
