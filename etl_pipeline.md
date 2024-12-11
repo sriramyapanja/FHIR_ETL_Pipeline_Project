@@ -154,10 +154,173 @@ Coding Task 1: Parent
 
 In this task, we retrieve a patient with conditions from the OpenEMR FHIR API server using their resource ID. We select one condition and extract its concept ID. Using the SNOMED Hermes API, we fetch the parent term for the concept. After transforming the data, we create a new Patient resource and post the corresponding Condition resource using the parent term to the Primary Care EHR FHIR server.
 
+Python code
+
+```
+def search_condition(patient_resource_id):
+    url = f'{BASE_URL}/Condition?patient={patient_resource_id}'
+    response = requests.get(url=url, headers=get_headers())
+    data = response.json()
+    #pprint(data)
+    if 'entry' in data:
+        conditions = data['entry']
+        thirty_condition = conditions[30]
+        snomed_code_30th_cond = thirty_condition['resource']['code']['coding'][0]['code']
+        parent = get_direct_parent(concept_id=snomed_code_30th_cond)
+        parent_code = parent[0]
+        parent_description = parent[1]
+        finding_site = get_body_site(concept_id=snomed_code_30th_cond)
+        site_code = finding_site[0]
+        site_description = finding_site[1]
+        # print(site_code)
+
+        new_condition_dict['code']['coding'][0]['code'] = parent_code
+        new_condition_dict['code']['coding'][0]['display'] = parent_description
+        new_condition_dict['code']['text'] = parent_description
+        new_condition_dict['bodySite'][0]['coding'][0]['code'] = site_code
+        new_condition_dict['bodySite'][0]['coding'][0]['display'] = site_description
+        new_condition_dict['bodySite'][0]['text'] = site_description
+        # new_condition_dict['onsetDateTime'] = "Not available"
+
+        new_condition_dict['subject']['reference'] = f"Patient/{patient_resource_id}"
+
+
+        new_condition_dict['subject']['reference'] = f"Patient/{patient_resource_id}"
+
+        with open(data_dir / 'patient_resource_id.txt', 'r') as f:
+            patient_resource_id = f.readline()
+        new_condition_dict['subject']['reference'] = f"Patient/{patient_resource_id}"
+
+        try:
+            headers = {
+                'Accept': "application/json"
+            }
+            url = PRIMARY_CARE_SERVER_URL + '/' + 'Condition'
+            response = requests.post(url=url, json=new_condition_dict, headers=headers)
+            if response.status_code == 200 or response.status_code == 201:
+                response_data = response.json()
+                print(response_data)
+                print('Condition resource created.')
+            else:
+                print(f'Error - {response.status_code}')
+        except Exception as e:
+            print('Could not process the request')
+    else:
+        print('No results found')
+def get_fhir_patient(patient_resource_id):
+    url = f'{BASE_URL}/Patient/{patient_resource_id}'
+    response = requests.get(url=url, headers=get_headers())
+    data = response.json()
+    #pprint(data)
+
+    new_patient_dict['name'][0]['family'] = data['name'][0]['family']
+    new_patient_dict['name'][0]['given'] = data['name'][0]['given']
+    new_patient_dict['identifier'][0]['value'] = random.randint(a=10000, b=99999)
+    new_patient_dict['identifier'][0]['period']['start'] = datetime.datetime.today().date().isoformat()
+    new_patient_dict['gender'] = data['gender']
+    new_patient_dict['birthDate'] = data['birthDate']
+
+    address_line = data['address'][0]['line'][0]
+    address_city = data['address'][0]['city']
+    address_state = data['address'][0]['state']
+    address_postcode = data['address'][0]['postalCode']
+
+    new_patient_dict['address'][0]['line'] = address_line
+    new_patient_dict['address'][0]['city'] = address_city
+    new_patient_dict['address'][0]['district']= 'Not found'
+    new_patient_dict['address'][0]['state'] = address_state
+    new_patient_dict['address'][0]['postalCode'] = address_postcode
+    new_patient_dict['address'][0]['text'] = f"{address_line}, {address_city}, {address_state}, {address_postcode}"
+
+    try:
+        headers = {
+            'Accept': "application/json"
+        }
+        url = PRIMARY_CARE_SERVER_URL + '/' + 'Patient'
+        response = requests.post(url=url, json=new_patient_dict, headers=headers)
+        if response.status_code == 200 or response.status_code == 201:
+            response_data = response.json()
+            with open(data_dir / 'patient_resource_id.txt', 'w') as f:
+                f.write(response_data['id'])
+                print('Patient resource ID created.')
+        else:
+            print(f'Error - {response.status_code}')
+    except Exception as e:
+        print(e)
+        
+```       
+
 
 Coding Task 2: Child
 
 For the second task, we reuse the patient data from Task 1 to identify conditions. We extract the concept ID of one condition and query the SNOMED Hermes API for a child term. Using this child term, we transform the data into the required format and post the Condition resource to the Primary Care EHR FHIR server.
+``` 
+def expression_constraint(concept_id):
+    search_string = f"<! {concept_id}"
+    response = requests.get(f'{BASE_HERMES_URL}/search?constraint={search_string}')
+    data = response.json()
+    if len(data):
+        first_item_from_results = data[0]
+        first_concept_id = first_item_from_results['conceptId']
+        first_concept_term = first_item_from_results['preferredTerm']
+        return first_concept_id, first_concept_term
+def get_snomed_code(patient_resource_id):
+    url = f'{BASE_URL}/Condition?patient={patient_resource_id}'
+    response = requests.get(url=url, headers=get_headers())
+    data = response.json()
+    if 'entry' in data:
+        conditions = data['entry']
+        thirty_condition = conditions[30]
+        snomed_code = thirty_condition['resource']['code']['coding'][0]['code']
+        child = expression_constraint(concept_id=snomed_code)
+        child_code = child[0]
+        child_pref_term = child[1]
+        body_site = get_body_site(snomed_id=child_code)
+        site_code = body_site[0]
+        bodysite_description = body_site[1]
+
+        url = f'{BASE_URL}/Patient/{patient_resource_id}'
+        response = requests.get(url=url, headers=get_headers())
+        data = response.json()
+
+        new_condition_dict['onsetDateTime'] = data['address'][0]['period']['start']
+        new_condition_dict['code']['coding'][0]['code'] = child_code
+        new_condition_dict['code']['coding'][0]['display'] = child_pref_term
+        new_condition_dict['code']['text'] = child_pref_term
+        with open(data_dir / 'patient_resource_id.txt', 'r') as f:
+            patient_resource_id = f.readline()
+        new_condition_dict['bodySite'][0]['coding'][0]['code'] = site_code
+        new_condition_dict['bodySite'][0]['coding'][0]['display'] = bodysite_description
+        new_condition_dict['bodySite'][0]['text'] = bodysite_description
+
+        new_condition_dict['severity']['coding'][0]['code']= "Not available"
+        new_condition_dict['severity']['coding'][0]['display']= "Not Available"
+        new_condition_dict['subject']['reference'] = f"Patient/{patient_resource_id}"
+
+
+
+
+        try:
+            headers = {
+                'Accept': "application/json"
+            }
+            url = PRIMARY_CARE_SERVER_URL + '/' + 'Condition'
+            response = requests.post(url=url, json=new_condition_dict, headers=headers)
+            if response.status_code == 200 or response.status_code == 201:
+                response_data = response.json()
+                #pprint(response_data)
+                print('Condition resource created.')
+            else:
+                print(f'Error - {response.status_code}')
+        except Exception as e:
+            print(e)
+
+
+if _name_ == '_main_':
+    patient_resource_id = '985ac75c-54cd-47ab-afe1-93d52db5ba48'
+    get_snomed_code(patient_resource_id=patient_resource_id)
+    
+```
 
 Coding Task 3: Observation
 
