@@ -12,7 +12,7 @@
 
 This documentation outlines the ETL (Extract, Transform, Load) process used to transfer patient condition data from one API (OpenEMR) to another (Primary Care EHR API). The pipeline consists of three primary steps: Extraction, Transformation, and Loading. Below is a detailed breakdown of each step, including Python code snippets and descriptions of how each task is handled.
 
-### 1. Extraction: Retrieving Data from the Source API (OpenEMR)
+## 1. Extraction: Retrieving Data from the Source API (OpenEMR)
 API Endpoint Details:
 The source API utilizes the FHIR standard to expose patient condition data.
 
