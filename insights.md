@@ -12,9 +12,13 @@
 
 ## Key insights gained from the project:
 
-Data Volume and Clinical Value: The OpenEMR FHIR API contains a significant volume of patient data, offering a rich source of information for clinical analysis and health trend insights.
+We understood the ETL process better while working on the code (Extract, Transform, and Load). At first, we just saw the overall picture and understood a bit by reading about it in English, but we gained more insights when we actually implemented the whole thing using Python, which is another language. This gave us a more cohesive understanding of the project. Reading and writing in different languages enhanced our understanding.
 
-Enhanced Interoperability: Integrating this data with the Hermes Terminology Server, and utilizing SNOMED CT parent-child mappings, helped structure the data more effectively, improving interoperability and clinical value.
+We also got a better grasp of data structures and mapping while working with JSON files and converting them into dictionaries. Our understanding deepened when we encountered errors while mapping and got stuck—it really emphasized the importance of understanding data structures across different APIs.
+
+Another key insight came from checking our work in multiple places, like Postman, the Primary Care EHR server, and the code results. Seeing the same thing from different perspectives gave us a more comprehensive understanding of what we were doing.
+
+
 
 ## Challenges Encountered :
 
