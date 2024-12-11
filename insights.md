@@ -8,6 +8,8 @@
 [Team Contributions](./team_contrib.md) ||
 [About](./about.md) ||
 
+![visualization_sample](./assets/Bpmn_model.png)
+
 ## Key insights gained from the project:
 
 Data Volume and Clinical Value: The OpenEMR FHIR API contains a significant volume of patient data, offering a rich source of information for clinical analysis and health trend insights.
