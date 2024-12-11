@@ -8,4 +8,5 @@ include:
   - README.md
   - index.md
 title: GROUP_3
-description: Welcome to our Final Project Portal, where we showcase our innovative solution that integrates data-driven workflows with practical applications. This website highlights the development and execution of an ETL (Extract, Transform, Load) Pipeline, BPMN (Business Process Model and Notation) workflows, and real-world use cases, demonstrating the power of streamlined processes and analytics.
+description: Welcome to our Final Project Portal, where we showcase our innovative solution that integrates data-driven workflows with practical applications. 
+  This website highlights the development and execution of an ETL (Extract, Transform, Load) Pipeline, BPMN (Business Process Model and Notation) workflows, and real-world use cases, demonstrating the power of streamlined processes and analytics.
