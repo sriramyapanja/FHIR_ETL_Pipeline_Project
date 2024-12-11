@@ -65,10 +65,6 @@ def get_snomed_code(patient_resource_id):
         child = expression_constraint(concept_id=snomed_code)
         child_code = child[0]
         child_pref_term = child[1]
-<<<<<<< HEAD
-=======
-        print(child_pref_term)
->>>>>>> d7b74c35a33a4e9009f248b6646208f467844a36
         body_site = get_body_site(snomed_id=child_code)
         site_code = body_site[0]
         bodysite_description = body_site[1]

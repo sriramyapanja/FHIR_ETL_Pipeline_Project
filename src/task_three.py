@@ -1,6 +1,5 @@
 import json
 import requests
-<<<<<<< HEAD
 from src.registration import data_dir
 from pprint import pprint
 from pathlib import Path
@@ -19,15 +18,6 @@ with open(file_path, 'r') as file:
 #     patient_resource_id = file.read().strip()
 # print(patient_resource_id)
 # data_dir = Path.cwd() / 'data'
-=======
-from pathlib import Path
-
-# Read the patient_resource_id from the file
-# with open('//Users/sriramyapanja/PycharmProjects/group_3_FINAL_PROJECT/src/data/patient_resource_id.txt', 'r') as file:
-#     patient_resource_id = file.read().strip()
-# print(patient_resource_id)
-data_dir = Path.cwd() / 'data'
->>>>>>> d7b74c35a33a4e9009f248b6646208f467844a36
 
 BASE_SERVER_URL = "http://137.184.71.65:8080/fhir"
 
@@ -58,12 +48,11 @@ def post_data(file_name, resource_name):
     # Define headers, including content-type as JSON
     headers = {
         "Content-Type": "application/json",
+
+
     }
 
-<<<<<<< HEAD
     data['subject']['reference'] = f"Patient/{patient_resource_id}"
-=======
->>>>>>> d7b74c35a33a4e9009f248b6646208f467844a36
     try:
         # Send POST request
         response = requests.post(url, json=data, headers=headers)
