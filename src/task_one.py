@@ -103,7 +103,7 @@ def get_fhir_patient(patient_resource_id):
         else:
             print(f'Error - {response.status_code}')
     except Exception as e:
-        print(e)
+        print('Could not execute the process of creating patient resource')
 
 
 def get_direct_parent(concept_id):
@@ -116,6 +116,7 @@ def get_direct_parent(concept_id):
     concept_description_response = requests.get(f'{BASE_HERMES_URL}/{first_parent_code}/extended')
     concept_description_data = concept_description_response.json()
     preferred_parent_description = concept_description_data['preferredDescription']['term']
+    print(preferred_parent_description)
     return first_parent_code, preferred_parent_description
 
 
@@ -172,7 +173,14 @@ def search_condition(patient_resource_id):
 
 if __name__ == '__main__':
     patient_resource_id = '985ac75c-54cd-47ab-afe1-93d52db5ba48'
+<<<<<<< HEAD
 
     # search_patient_by_name(name_string='Bailey')
     get_fhir_patient(patient_resource_id)
     search_condition(patient_resource_id)
+=======
+    search_patient_by_name(name_string='Bailey')
+    get_fhir_patient(patient_resource_id)
+    search_condition(patient_resource_id)
+
+>>>>>>> d7b74c35a33a4e9009f248b6646208f467844a36
