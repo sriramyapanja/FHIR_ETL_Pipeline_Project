@@ -37,11 +37,8 @@ def post_data(file_name, resource_name):
     # Define headers, including content-type as JSON
     headers = {
         "Content-Type": "application/json",
-
-
     }
 
-    #patient_ob['subject']['reference'] = f"Patient/{patient_resource_id}"
     try:
         # Send POST request
         response = requests.post(url, json=data, headers=headers)
