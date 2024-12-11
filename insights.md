@@ -30,12 +30,12 @@ Data Compatibility Challenges:
 
 SNOMED CT Values and String Input: In Task 2, SNOMED CT values required string inputs, but the data initially had numerical values.  We made adjustments to ensure compatibility and proper processing of the data by converting numerical values into string inputs.
 
-## Lessons Learned
+## Lessons Learned:
 
 ETL Pipeline Demonstration: A valuable demonstration for professional use involves querying and posting data to an API server using a single key, such as a patient ID or name. This demonstrates how data can be extracted and updated in real-time, making it relevant for day-to-day professional tasks.
 
 
-## Potential Improvements
+## Potential Improvements:
 
 Incorporate Automation and AI: Using machine learning algorithms for tasks like data validation, anomaly detection, or predictive analysis might significantly improve data accuracy and produce outcomes that are more insightful.
 
