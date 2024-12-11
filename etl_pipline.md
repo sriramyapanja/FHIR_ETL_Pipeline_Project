@@ -10,5 +10,14 @@
 
 ## Introduction
 
+## Python code
 
+The following `python code` prints Hello World to the terminal.
+
+1. **James Madison**
+2. _James Monroe_
+3. <ins>John Quincy Adams
+
+```
+print('Hello World')
 ```
