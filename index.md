@@ -46,6 +46,8 @@ Python Scripts: Four Python tasks that showcase essential ETL functions:
 Retrieving parent and child medical terms using FHIR APIs and SNOMED codes.
 Creating and managing patient information, including conditions, observations, and procedures.
 
+GitHub repository :  A well-organized repository containing the project’s code, documentation, and resources, with clear instructions for running the scripts.
+
 Professional GitHub Pages Website: A project website documenting every aspect of the ETL pipeline. This includes:
 
 An overview of the project.

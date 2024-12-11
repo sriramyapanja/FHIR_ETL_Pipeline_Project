@@ -20,16 +20,13 @@ Upon receiving the referral, the hospital reviews the details to ensure accuracy
 
  Specialist Evaluation and Treatment 
 
-A specialist evaluates the patient’s condition to determine the appropriate course of treatment. If treatment is required, the necessary care is provided. A decision gateway is used where the specialist evaluates whether further treatment is necessary. 
+A specialist evaluates the patient’s condition to determine the appropriate course of treatment. The specialist provides the necessary care. A decision gateway is used where the specialist evaluates whether further treatment is necessary in other departments.
 
  Decision on Further Treatment 
 
-If Further Treatment is Needed: The patient is referred back to the Primary Care Clinic for ongoing care and follow-up. 
+If patient  needs further treatments, they are referred to primary care or else  discharged from the hospital. Meanwhile both the discharged patient’s and the referred patients’s treatment details are conveyed to primary care and documented in hospital EHR.
 
-If Treatment is Complete: The patient is discharged from the hospital. 
-
- Documentation and Communication from Hospital to Primary Care 
-
+ 
 Post-treatment, the hospital documents a comprehensive treatment summary, including outcomes and recommendations. This summary is shared with the Primary Care Clinic to ensure continuity of care. 
 
  Follow-Up Care Coordination at Primary Care 
