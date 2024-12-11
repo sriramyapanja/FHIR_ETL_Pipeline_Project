@@ -9,7 +9,7 @@ Home Page
 [Team Contributions](./team_contrib.md) ||
 [About](./about.md) ||
 
-![project_overview_image](./assets/project_architecture.png)
+!(./assets/project_architecture.png)
 
 ## ETL Project Documentation
 PROJECT OVERVIEW
