@@ -36,13 +36,6 @@ def get_headers():
     return headers
 
 
-# def get_fhir_resource(resource_name):
-#     url = f'{BASE_URL}/{resource_name}'
-#     response = requests.get(url=url, headers=get_headers())
-#     print(response.url)
-#     # pprint(response.json())
-
-
 def search_patient_by_name(name_string):
     url = f'{BASE_URL}/Patient?name={name_string}'
     response = requests.get(url=url, headers=get_headers())
@@ -67,13 +60,12 @@ def get_body_site(concept_id):
     #getting the preferred term of the Finding site of the condition
     finding_site_description_response = requests.get(f'{BASE_HERMES_URL}/{finding_site_code}/extended')
     finding_site_data = finding_site_description_response.json()
-    #pprint(finding_site_data)
     finding_site_description = finding_site_data['preferredDescription']['term']
     return finding_site_code, finding_site_description
 
 
-def get_fhir_patient(resource_id):
-    url = f'{BASE_URL}/Patient/{resource_id}'
+def get_fhir_patient(patient_resource_id):
+    url = f'{BASE_URL}/Patient/{patient_resource_id}'
     response = requests.get(url=url, headers=get_headers())
     data = response.json()
     #pprint(data)
@@ -92,7 +84,7 @@ def get_fhir_patient(resource_id):
 
     new_patient_dict['address'][0]['line'] = address_line
     new_patient_dict['address'][0]['city'] = address_city
-    # new_patient_dict['address'][0]['district']= data['address'][0]['district']
+    new_patient_dict['address'][0]['district']= 'Not found'
     new_patient_dict['address'][0]['state'] = address_state
     new_patient_dict['address'][0]['postalCode'] = address_postcode
     new_patient_dict['address'][0]['text'] = f"{address_line}, {address_city}, {address_state}, {address_postcode}"
@@ -173,14 +165,14 @@ def search_condition(patient_resource_id):
             else:
                 print(f'Error - {response.status_code}')
         except Exception as e:
-            print(e)
+            print('Could not process the request')
     else:
         print('No results found')
 
 
 if __name__ == '__main__':
+    patient_resource_id = '985ac75c-54cd-47ab-afe1-93d52db5ba48'
+
     # search_patient_by_name(name_string='Bailey')
-
-    get_fhir_patient(resource_id='985ac75c-54cd-47ab-afe1-93d52db5ba48')
-    search_condition(patient_resource_id='985ac75c-54cd-47ab-afe1-93d52db5ba48')
-
+    get_fhir_patient(patient_resource_id)
+    search_condition(patient_resource_id)
