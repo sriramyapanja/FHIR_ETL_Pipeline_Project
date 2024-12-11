@@ -1,8 +1,8 @@
 import json
 import requests
 from src.registration import data_dir
-from pprint import pprint
-from pathlib import Path
+# from pprint import pprint
+# from pathlib import Path
 
 from pathlib import Path
 
@@ -12,19 +12,12 @@ with open(file_path, 'r') as file:
     patient_resource_id = file.read().strip()
 
 
-
-#Read the patient_resource_id from the file
-# with open('/Users/sriramyapanja/PycharmProjects/Group3_Project_Final/src/data/patient_resource_id.txt', 'r') as file:
-#     patient_resource_id = file.read().strip()
-# print(patient_resource_id)
-# data_dir = Path.cwd() / 'data'
-
 BASE_SERVER_URL = "http://137.184.71.65:8080/fhir"
 
 
 def read_data(name_of_the_file):
     # Define the path to your JSON file
-    py_file_path = data_dir / f"{name_of_the_file}.py"
+    py_file_path = f"{name_of_the_file}.py"
 
     # Load the data from the JSON file
     try:
@@ -37,8 +30,6 @@ def read_data(name_of_the_file):
         print("Error decoding JSON:", e)
         exit()
     return data
-
-    #data['subject']['reference'] = f"Patient/{patient_resource_id}"
 
 
 def post_data(file_name, resource_name):
