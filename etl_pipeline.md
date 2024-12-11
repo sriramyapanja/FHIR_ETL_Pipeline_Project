@@ -12,7 +12,7 @@
 
 This documentation outlines the ETL (Extract, Transform, Load) process used to transfer patient condition data from one API (OpenEMR) to another (Primary Care EHR API). The pipeline consists of three primary steps: Extraction, Transformation, and Loading. Below is a detailed breakdown of each step, including Python code snippets and descriptions of how each task is handled.
 
-1. Extraction: Retrieving Data from the Source API (OpenEMR)
+### 1. Extraction: Retrieving Data from the Source API (OpenEMR)
 API Endpoint Details:
 The source API utilizes the FHIR standard to expose patient condition data.
 
@@ -27,7 +27,7 @@ Patient Resource Endpoint:
 Patient/{patient_resource_id}
 This provides detailed patient information such as demographics.
 
-Authentication/Authorization:
+### Authentication/Authorization:
 The API requires Bearer Token authentication.
 
 The access token is retrieved from a local JSON file (access_token.json).
@@ -49,7 +49,7 @@ def get_access_token_from_file():
         print(f"Error reading access token from file: {e}")
         return None
 ```
-## Error handling:
+### Error handling:
 
 If the access token file is missing, the process stops.
 If the JSON file is malformed or missing a required key, an error message is printed, and None is returned.
@@ -68,7 +68,7 @@ def get_snomed_code(patient_resource_id):
         # Further processing...
 ```
 
-2.Transformation: Cleaning and Structuring Data
+### 2.Transformation: Cleaning and Structuring Data
 
 The transformation step prepares the extracted data to match the target API format.
 
@@ -77,7 +77,7 @@ Techniques for Cleaning and Structuring Data:
 Handling Missing Fields: When fields such as severity are missing, placeholder values like "Not Available" are used to maintain consistency.
 Mapping Source Data to Target Format: Data like SNOMED CT codes, body site information, and patient details are accurately mapped to match the target API’s structure.
 
-Tools Used:
+### Tools Used:
 
 SNOMED CT Lookup: To enrich the data with additional details like SNOMED CT child terms and body site information, the pipeline interacts with external systems via the BASE_HERMES_URL.
 
@@ -93,7 +93,7 @@ def expression_constraint(concept_id):
         first_item_from_results = data[0]
         return first_item_from_results['conceptId'], first_item_from_results['preferredTerm']
 ```
-Data Mapping: The fetched data from OpenEMR is transformed into the correct format required by the Primary Care EHR API.
+### Data Mapping: The fetched data from OpenEMR is transformed into the correct format required by the Primary Care EHR API.
 
 Data Formatting Example:
 
@@ -109,7 +109,7 @@ new_condition_dict['bodySite'][0]['text'] = bodysite_description
 new_condition_dict['severity']['coding'][0]['code'] = "Not available"
 new_condition_dict['subject']['reference'] = f"Patient/{patient_resource_id}"
 ```
-3. Loading: Posting Data to the Target API (Primary Care EHR)
+### 3. Loading: Posting Data to the Target API (Primary Care EHR)
 After transforming the data, it is sent to the target API using an HTTP POST request.
 
 Process Involved:
