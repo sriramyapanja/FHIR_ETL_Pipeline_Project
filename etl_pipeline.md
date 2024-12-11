@@ -77,7 +77,7 @@ Techniques for Cleaning and Structuring Data:
 Handling Missing Fields: When fields such as severity are missing, placeholder values like "Not Available" are used to maintain consistency.
 Mapping Source Data to Target Format: Data like SNOMED CT codes, body site information, and patient details are accurately mapped to match the target API’s structure.
 
-## Tools Used:
+### Tools Used:
 
 SNOMED CT Lookup: To enrich the data with additional details like SNOMED CT child terms and body site information, the pipeline interacts with external systems via the BASE_HERMES_URL.
 
@@ -93,7 +93,8 @@ def expression_constraint(concept_id):
         first_item_from_results = data[0]
         return first_item_from_results['conceptId'], first_item_from_results['preferredTerm']
 ```
-## Data Mapping: The fetched data from OpenEMR is transformed into the correct format required by the Primary Care EHR API.
+### Data Mapping:
+The fetched data from OpenEMR is transformed into the correct format required by the Primary Care EHR API with the help of dict [new_patient_dict] and [new_condition_dict].
 
 Data Formatting Example:
 
@@ -148,6 +149,49 @@ Error Handling:
 
 If the POST request fails (e.g., due to an invalid token or data formatting issue), an error message with the status code is printed.
 Network-related errors are caught and displayed as exceptions.
+
+Coding Task 1: Parent
+
+In this task, we retrieve a patient with conditions from the OpenEMR FHIR API server using their resource ID. We select one condition and extract its concept ID. Using the SNOMED Hermes API, we fetch the parent term for the concept. After transforming the data, we create a new Patient resource and post the corresponding Condition resource using the parent term to the Primary Care EHR FHIR server.
+
+
+Coding Task 2: Child
+
+For the second task, we reuse the patient data from Task 1 to identify conditions. We extract the concept ID of one condition and query the SNOMED Hermes API for a child term. Using this child term, we transform the data into the required format and post the Condition resource to the Primary Care EHR FHIR server.
+
+Coding Task 3: Observation
+
+In this task, we manually create a Blood Pressure Observation resource in JSON format. The resource includes details such as systolic and diastolic values, the patient reference, and measurement time. The JSON document is then posted to the Primary Care EHR FHIR server.
+
+Python code
+```
+observation_data = {
+    "resourceType": "Observation",
+    "code": {"coding": [{"code": "85354-9", "display": "Blood pressure panel"}]},
+    "valueQuantity": {"systolic": 120, "diastolic": 80},
+    "subject": {"reference": f"Patient/{patient_resource_id}"},
+    "effectiveDateTime": "2024-12-10"
+}
+response = requests.post(f'{BASE_SERVER_URL}/Observation', json=observation_data, headers=headers)
+
+```
+
+Coding Task 4: Procedure
+
+In this final task, we create a Procedure resource for the patient from Task 1. The resource includes the procedure code, performed date, and patient reference. Like the previous task, this resource is created manually in JSON format and posted to the Primary Care EHR FHIR server.
+
+Python code
+
+```
+procedure_data = {
+    "resourceType": "Procedure",
+    "code": {"coding": [{"code": "428191000124101", "display": "Blood test procedure"}]},
+    "subject": {"reference": f"Patient/{patient_resource_id}"},
+    "performedDateTime": "2024-12-10"
+}
+response = requests.post(f'{BASE_SERVER_URL}/Procedure', json=procedure_data, headers=headers)
+
+```
 
 ## Challenges and Solutions
 1. Handling Missing Data:
