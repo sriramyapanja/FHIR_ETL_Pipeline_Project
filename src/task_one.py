@@ -134,7 +134,12 @@ def search_condition(patient_resource_id):
         finding_site = get_body_site(concept_id=snomed_code_30th_cond)
         site_code = finding_site[0]
         site_description = finding_site[1]
-        print(site_code)
+
+
+        url = f'{BASE_URL}/Patient/{patient_resource_id}'
+        response = requests.get(url=url, headers=get_headers())
+        data = response.json()
+        new_condition_dict['onsetDateTime'] = data['address'][0]['period']['start']
 
         new_condition_dict['code']['coding'][0]['code'] = parent_code
         new_condition_dict['code']['coding'][0]['display'] = parent_description
@@ -142,10 +147,9 @@ def search_condition(patient_resource_id):
         new_condition_dict['bodySite'][0]['coding'][0]['code'] = site_code
         new_condition_dict['bodySite'][0]['coding'][0]['display'] = site_description
         new_condition_dict['bodySite'][0]['text'] = site_description
-        #         # new_condition_dict['onsetDateTime']=
+        new_condition_dict['severity']['coding'][0]['code'] = "Not available"
+        new_condition_dict['severity']['coding'][0]['display'] = "Not Available"
         new_condition_dict['subject']['reference'] = f"Patient/{patient_resource_id}"
-
-        #         # new_condition_dict['onsetDateTime']=
         new_condition_dict['subject']['reference'] = f"Patient/{patient_resource_id}"
 
         with open(data_dir / 'patient_resource_id.txt', 'r') as f:
