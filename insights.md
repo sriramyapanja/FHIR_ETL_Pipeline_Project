@@ -8,7 +8,7 @@
 [Team Contributions](./team_contrib.md) ||
 [About](./about.md) ||
 
-![visualization_sample](./assets/Bpmn_model.png)
+![visualization_sample](./assets/Visualization.png)
 
 ## Key insights gained from the project:
 
