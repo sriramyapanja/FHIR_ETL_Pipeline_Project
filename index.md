@@ -1,9 +1,5 @@
-# Home
 
-## This is my Home page
-
-- This is where my Home documentation goes.
-- See my fancy project overview image below
+Home Page
 
 [Home](./index.md) ||
 [BPMN Model](./bpmn.md) ||
@@ -16,41 +12,47 @@
 ![project_overview_image](./assets/project_architecture.png)
 
 ## ETL Project Documentation
+PROJECT OVERVIEW
 
-My ETL Project aims to get data from the OpenEMR FHIR API, does some transformation and then load the data to another
-FHIR API
+Introduction 
+
+Our project focuses on designing and implementing an ETL (Extract, Transform, Load) pipeline to streamline healthcare data exchange between systems using modern interoperability standards. The project emphasizes the integration of healthcare data from multiple sources, ensuring accurate and efficient data processing to support clinical workflows and decision-making.
+
 
 ## The purpose of the ETL pipeline
 
-"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
-eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
-voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
-voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
-sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima
-veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis
-autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem
-eum fugiat quo voluptas nulla pariatur?"
+The ETL pipeline is designed to extract data from various sources, transform it into a consistent and usable format, and load it into a target system. This pipeline supports seamless data integration, enabling healthcare providers to access, analyze, and act on valuable patient data. It's primary goal is to facilitate efficient interoperability between systems while ensuring data accuracy and reliability for better decision-making and improved patient outcomes.
+
 
 ## The key tools and technologies used
 
-At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti
-quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia
-deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam
-libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere
-possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut
-rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic
-tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus
-asperiores repellat."
+Our project uses a combination of modern tools and technologies to implement the ETL pipeline effectively:
+
+Python: We used python for scripting the ETL pipeline, managing API connections, and handling data transformation tasks with precision.
+
+FHIR API: To ensure structured and interoperable data exchange across healthcare systems.
+
+Hermes Terminology Server: For accessing standardized medical terminologies, such as SNOMED codes, to enhance data consistency.
+
+OpenEMR FHIR Server: As the primary data source for extracting and managing patient information and conditions.
+
+GitHub Pages: To host a professional project website, presenting the pipeline, documentation, diagrams, and visualizations.
 
 ## Summary of the deliverables
 
-- On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the
-  charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound
-  to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as
-  saying through shrinking from toil and pain.
-- These cases are perfectly simple and easy to distinguish.
-- In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like
-  best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of
-  duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances
-  accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to
-  secure other greater pleasures, or else he endures pains to avoid worse pains.
+ETL Pipeline: A fully functional pipeline that extracts data from different sources, transforms it into a consistent format, and loads it into a target system. 
+
+Python Scripts: Four Python tasks that showcase essential ETL functions:
+Retrieving parent and child medical terms using FHIR APIs and SNOMED codes.
+Creating and managing patient information, including conditions, observations, and procedures.
+
+Professional GitHub Pages Website: A project website documenting every aspect of the ETL pipeline. This includes:
+
+An overview of the project.
+BPMN and use case diagrams.
+Detailed technical documentation of the pipeline.
+Individual and team contributions.
+Reflections on challenges, insights, and lessons learned.
+
+Insights and Visualizations:
+Important findings from processed medical data that are presented in an understandable manner. These observations highlight the ETL pipeline's importance in identifying trends and facilitating data-driven decisions in medical environments.
