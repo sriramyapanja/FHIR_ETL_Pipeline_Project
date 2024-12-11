@@ -103,7 +103,7 @@ def get_fhir_patient(patient_resource_id):
         else:
             print(f'Error - {response.status_code}')
     except Exception as e:
-        print(e)
+        print('Could not execute the process of creating patient resource')
 
 
 def get_direct_parent(concept_id):
@@ -165,7 +165,7 @@ def search_condition(patient_resource_id):
             else:
                 print(f'Error - {response.status_code}')
         except Exception as e:
-            print(e)
+            print('Could not process the request')
     else:
         print('No results found')
 

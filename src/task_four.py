@@ -11,7 +11,7 @@ BASE_SERVER_URL = "http://137.184.71.65:8080/fhir"
 data_dir = Path.cwd() / 'data'
 
 def read_data(name_of_the_file):
-    # Defining the path to your JSON file
+    # Defining the path to JSON file
     py_file_path = data_dir / f"{name_of_the_file}.py"
 
     # Loading the data from the JSON file
@@ -26,8 +26,6 @@ def read_data(name_of_the_file):
         exit()
     return data
 
-    #data['subject']['reference'] = f"Patient/{patient_resource_id}"
-
 
 def post_data(file_name, resource_name):
     # Define the URL of the API endpoint
@@ -37,8 +35,10 @@ def post_data(file_name, resource_name):
     headers = {
         "Content-Type": "application/json",
     }
+    with open(data_dir / 'patient_resource_id.txt', 'r') as f:
+        patient_resource_id = f.read().strip()
 
-    #patient_ob['subject']['reference'] = f"Patient/{patient_resource_id}"
+    patient_ob['subject']['reference'] = f"Patient/{patient_resource_id}"
     try:
         # Sending POST request
         response = requests.post(url, json=data, headers=headers)
