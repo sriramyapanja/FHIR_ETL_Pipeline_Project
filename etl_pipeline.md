@@ -154,6 +154,7 @@ Network-related errors are caught and displayed as exceptions.
 Missing fields, such as body site or severity, are handled by assigning placeholder values (e.g., "Not available") to ensure the data structure remains intact.
 2. Data Mapping Issues:
 SNOMED CT code mismatches are resolved by performing multiple lookups (e.g., expression_constraint and get_body_site) to ensure correct terms are used.
+
 3. API Authorization:
 The access token is retrieved from a local file, and the process stops if the file is missing or if the token is invalid.
 Summary of the ETL Pipeline
