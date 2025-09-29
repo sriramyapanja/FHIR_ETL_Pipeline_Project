@@ -2,7 +2,6 @@
 
   Use case diagrams illustrate the interactions between users and a system, highlighting key processes and roles. This page showcases a use case for the Hospital Referral Management System, demonstrating how primary care clinics, hospitals, and specialists collaborate to manage referrals, make treatment decisions, and ensure effective communication for seamless patient care.
 
-Some fancy intro
 
 [Home](./index.md) ||
 [BPMN Model](./bpmn.md) ||
