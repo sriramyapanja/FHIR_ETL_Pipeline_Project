@@ -310,4 +310,4 @@ if __name__ == '__main__':
 
 Project's website can be accessed using the link below
 
-https://pages.github.iu.edu/himatelu/Group3_Project_Final/
+ https://sriramyapanja.github.io/FHIR_ETL_Pipeline_Project/
