@@ -310,4 +310,4 @@ if __name__ == '__main__':
 
 Project's website can be accessed using the link below
 
- https://sriramyapanja.github.io/FHIR_ETL_Pipeline_Project/
+https://sriramyapanja.github.io/FHIR_ETL_Pipeline_Project/
